@@ -65,7 +65,7 @@
 
                       
 
-                      <button type="submit" class="btn btn-primary">Se connecter</button>
+                      <a href="home_admin.php" class="btn btn-primary">Se connecter</a>
             </form>
           </div>
           <div class="text-center">

@@ -7,11 +7,11 @@
     <span style="color: grey;" class="d-sm-none d-sm-block d-none d-md-block">0500770079</span>
     <span style="color: grey;" class="d-sm-none d-sm-block d-none d-md-block">deliveryalami2020@gmail.com</span>
 
-    <button class="btn btn-nav btn-lg" style="background-color: #9573D4; " type="button"><a style="text-decoration:none; color:white" href="connexion_client.php">espace client</a> </button>
-  <button class="btn btn-nav btn-lg " style="background-color: #9573D4; color:white;" type="button"><a style="text-decoration:none; color:white" href="connexion_admin.php">espace admin</a></button>
+    <a class="btn client btn-nav btn-lg" style="text-decoration:none; color:white; background-color: #9573D4; " href="connexion_client.php">espace client</a> 
+    <a class="btn admin btn-nav btn-lg" style="text-decoration:none; color:white; background-color: #9573D4; " href="connexion_admin.php">espace admin</a> 
 
     
-    <button class="navbar-toggler" type="button" style="background-color: #4759B1 ;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+    <button class="navbar-toggler" type="button" style="background-color: #e6e6e6 ;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
       <span class="navbar-toggler-icon"></span>
     </button>
     
@@ -25,28 +25,28 @@
         <div class="offcanvas-body" >
           <div class="dropdown mt-3" >
               
-              <ul class="navbar-nav  justify-content-end flex-grow-1 pe-3 btn-group"  role="group" aria-label="Basic radio toggle button group">
-                  <li class="nav-item btn  btn-outline-light mb-2 rounded" style ="display: flex;justify-content: flex-start" >
-                    <a class="nav-link mask"  aria-current="page" href="acceuil.php" style="  COLOR: #0C2340; FONT-SIZE: unset;FONT-WEIGHT: bold; font-family: monospace;">
-                    <i class="fa  fa-3x fa-home " aria-hidden="true"></i><span class="fs-3"  > acceuil</span></a>
+          <ul class="navbar-nav  w-100  flex-grow-1 pe-3 btn-group d-flex flex-column"  role="group" aria-label="Basic radio toggle button group">
+
+                  
+                  <li class="nav-item btn btn-outline-light mb-2 rounded justify-content-center " style ="display: flex;" >
+                    <a class="nav-link "  href="acceuil.php"style="  COLOR: #0C2340; FONT-SIZE: unset; FONT-WEIGHT: bold; font-family: monospace;">
+                    <i class="fa  fa-3x fa-home" aria-hidden="true" ></i><p class="fs-4"  >Acceuil</p> </a>
                   </li>
-                  <li class="nav-item btn btn-outline-light mb-2 rounded"  style ="display: flex;justify-content: flex-start">
-                    <a class="nav-link"  href="professeur" style="  COLOR: #0C2340; FONT-SIZE: unset;FONT-WEIGHT: bold; font-family: monospace;">
-                    <i class="fa fa-male  fa-3x" aria-hidden="true" ></i><span class="fs-3"   >Espace client </span></a>
+                  
+                  <li class="nav-item btn btn-outline-light mb-2 rounded"  style ="display: flex;">
+                    <a class="nav-link"  href="connexion_client.php" style="  COLOR: #0C2340; FONT-SIZE: unset;FONT-WEIGHT: bold; font-family: monospace;">
+                    <i class="fa fa-male  fa-3x" aria-hidden="true" ></i><p class="fs-4"   >Espace client </p></a>
                   </li>
-                  <li class="nav-item btn btn-outline-light mb-2 rounded " style ="display: flex;justify-content: flex-start">
-                    <a class="nav-link "  href="etudiants"style="  COLOR: #0C2340; FONT-SIZE: unset;FONT-WEIGHT: bold; font-family: monospace;">
-                    <i class="fa fa-3x fa-users" aria-hidden="true" ></i><span class="fs-3"  >Espace admin</span> </a>
+                  <li class="nav-item btn btn-outline-light mb-2 rounded " style ="display: flex;">
+                    <a class="nav-link "  href="connexion_admin.php"style="  COLOR: #0C2340; FONT-SIZE: unset; FONT-WEIGHT: bold; font-family: monospace;">
+                    <i class="fa fa-3x fa-shield" aria-hidden="true" ></i><p class="fs-4"  >Espace admin</p> </a>
                   </li>
-                  <li class="nav-item btn btn-outline-light mb-2 rounded " style ="display: flex;justify-content: flex-start" >
-                    <a class="nav-link "  href="parent"style="  COLOR: #0C2340; FONT-SIZE: unset;FONT-WEIGHT: bold; font-family: monospace;">
-                    <i class="fa  fa-3x fa-address-card" aria-hidden="true" ></i><span class="fs-3"  >A propos de Nos</span> </a>
+                  <li class="nav-item btn btn-outline-light mb-2 rounded " style ="display: flex;" >
+                    <a class="nav-link "  href="A_propos_de_nous.php"style="  COLOR: #0C2340; FONT-SIZE: unset; FONT-WEIGHT: bold; font-family: monospace;">
+                    <i class="fa  fa-3x fa-info-circle" aria-hidden="true" ></i><p class="fs-4"  >A propos de Nous</p> </a>
                   </li>
-                  <li class="nav-item btn btn-outline-light mb-2 rounded " style ="display: flex;justify-content: flex-start">
-                    <a class="nav-link "  href="Administrateur"style="  COLOR: #0C2340; FONT-SIZE: unset;FONT-WEIGHT: bold; font-family: monospace;">
-                    <i class="fa fa-3x fa-user" aria-hidden="true"></i><span class="fs-3"  >Admin</span> </a>
-                  </li>
-                
+                 
+         
                  
                 </ul>
           </div>

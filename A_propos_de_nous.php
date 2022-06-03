@@ -33,7 +33,7 @@
 </style>
 
 
-<body style="overflow-x:hidden; width:auto;">
+<body style="overflow-x:hidden;  width:auto; ">
 <?php include('sidebar.php') ?>
 
 <section class="mt-0 " style="background-image: url('bac.png');
@@ -46,7 +46,7 @@
 
          <div class="row">
          <div class="col-sm-6 n" style="opacity: 0.0 ;">
-                nnnn
+                n
             </div>
             
             <div class="col-sm-6 d">
@@ -56,11 +56,47 @@
             </div> 
          </div>
 
+        
+       <div class="row mt-5 " >
+         <div class="col-10 mb-5 container" style="background-color:rgba(255, 255, 255, 0.612);">
+             <h4 class="font-monospace  fw-bold" >Delivery est une société de livraison au Maroc qui offres ses services aux particuliers, professionnels et e-commerçants. Créé en 2018, dont le siége
+       est avenue Iziki N° 108 MARRAKECH-Maroc.
+
+ Notre société assure le stockage des colis, le ramassage, la livraison, le retour des fonds, nous livrons et distribuons dans plus de 260 destinations au Maroc.
+ Notre objectif est de résoudre tous les problémes liés à la livraison et d'augmenter le taux de livraison.</h4>
          
-         <div class=" row container ">
-             <a  style="width:300px; height: 70px; margin-left:10%; margin-top:400px; background-color:#343BA8; text-decoration: none; color:white "  href="https://goo.gl/maps/htUQNtf932EZVf59A" class="btn btn-log col-12 shadow-lg p-3 mb-5 rounded-pill btn-lg">Localisation</a>
-        </div>
+         </div>
+
+       </div>
+         
+         
 </section>
+
+
+
+
+<section class="container mb-5">
+<H1 style="color:#9573D4" class="text-center mt-5">Nos Services</H1>
+<div class="container" style="">
+         <div class="row mt-5 gx-5">
+                <div class="col-lg-4" >
+                <div class="p-3 border shadow-lg p-3 mb-5  rounded " style="background-color: white;" ><span class="fs-3 fw-bold font-monospace">Livraison</span><i class="fa fa-2x ms-2  fa-shopping-cart"  style="color:#9573D4;" aria-hidden="true"></i> <p class="fs-5 font-monospace mt-5 ">Nous assurons la livraison de vos colis dans les plus bref delais et dans plus de 260 villes et provinces.</p></div>
+                </div>
+                
+
+                <div class="col-lg-4">
+                <div class="p-3 border shadow-lg p-3 mb-5  rounded" style="background-color: white;"  ><span class="fs-3 fw-bold font-monospace">Ramassage</span><i class="fa ms-2 fa-2x fa-truck" style="color:#9573D4;" aria-hidden="true"></i> <p class="fs-5 font-monospace mt-5 ">Nous assurons la livraison de vos colis dans les plus bref delais.</p></div>
+                
+                </div>
+
+                <div class="col-lg-4">
+                <div class="p-3 border shadow-lg p-3 mb-5  rounded " style="background-color: white;"  ><span class="fs-3 fw-bold font-monospace">Stockage</span><i class="fa ms-2 fa-2x fa-cubes" style="color:#9573D4;" aria-hidden="true"></i><p class="fs-5 font-monospace mt-5 ">Stockage avec suivi à distance, service de gestion des stocks à distance avec une technologie moderne.</p></div>
+                
+                </div>
+            </div>
+         </div>
+</section>
+
 
 <section class="bg-light ">
 
@@ -91,60 +127,8 @@
         
 
 </section>
-
-
-<section class="container mb-5">
-    <H1 style="color:#9573D4" class="text-center mt-5">Nos Services</H1>
-
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner mt-5">
-
-    <div class="carousel-item active">
-      
-                <div class="card d-block w-100" style="width: 18rem;">
-            <img src="livraison.jpg" class="card-img-top" alt="...">
-            <div class="card-body text-center">
-                <H1 style="color:#343BA8 ;" class="card-text text-center">Livraison.</H1>
-                <p>Nous assurons la livraison de vos colis dans les plus bref delais.</p>
-            </div>
-            </div>
-    </div>
-
-    <div class="carousel-item">
-    <div class="card d-block w-100" style="width: 18rem;">
-            <img src="ramassage.jpg" class="card-img-top" alt="...">
-            <div class="card-body text-center">
-                <H1 style="color:#343BA8 ;" class="card-text">Ramassage.</H1>
-                <p>Un de nos agent va se deplacer chez vous pour ramasser tous vos colis</p>
-            </div>
-            </div>
-    </div>
-
-    <div class="carousel-item">
-    <div class="card d-block w-100" style="width: 18rem;">
-            <img src="stockage.jpg" class="card-img-top" alt="...">
-            <div class="card-body text-center">
-                <h1 style="color:#343BA8 ;" class="card-text">Stockage.</h1>
-                <p>Stockage avec suivi à distance, service de gestion des stocks à distance avec une technologie moderne</p>
-            </div>
-            </div>
-    </div>
-
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-</section>
-
-
 <footer  style=" color:white; background-color:#343BA8;">
-        <div class="container ">
+        <div class="container  ">
             <div class="row text-center">
             <h4 class="fw-bolder mt-5 col-sm-6">Faites-nous confiance et envoyez vos colis avec nous en toute sécurité!</h4>
             <h4 class="fw-bolder mt-5 col-sm-6" style="color:orange;"><span class="ms-5"> 0500770079</span></h4>
