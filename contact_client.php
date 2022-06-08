@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include('scriipt.php'); ?>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>
     <title>Document</title>
 </head>
 <style>
@@ -31,6 +34,7 @@
 
    
  }
+ 
  .admin 
  {
      display: none;
@@ -53,20 +57,20 @@
           <form>
           <div class="mb-3">
                         
-                        <input type="text" class="form-control" placeholder="Nom" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input required	data-parsley-required="true" minlength="3"	data-parsley-minlength="3"	 type="text" class="form-control" placeholder="Nom" id="exampleInputEmail1" aria-describedby="emailHelp">
                         
               </div>
 
          
               <div class="mb-3">
                    
-                        <input type="email" placeholder="Adresse Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="email" required	data-parsley-required="true"  data-parsley-type="email" placeholder="Adresse Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         
               </div>
 
                 <div class="input-group mb-3">
                 
-                <textarea class="form-control " placeholder="Sujet" aria-label="With textarea"></textarea>
+                <textarea required	data-parsley-required="true" class="form-control " placeholder="Sujet" aria-label="With textarea"></textarea>
                 </div>
                       <button type="submit" class="btn btn-primary">Envoyer</button>
             </form>

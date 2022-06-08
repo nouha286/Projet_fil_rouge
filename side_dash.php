@@ -26,7 +26,7 @@
                             <i class="fa fa-2x fa-map-marker" aria-hidden="true"></i><span class="fs-6 d-none d-sm-block d-sm-none d-md-block"  >Suivi</span> </a>
                         </li>
                         <li class="nav-item btn  mt-5 text-center mb-2 rounded " style="max-width:100px ;" >
-                            <a class="nav-link "  href="connexion_client.php"style="  COLOR: #0C2340; FONT-SIZE: unset;FONT-WEIGHT: bold; font-family: monospace;">
+                            <a class="nav-link "  href="logout.php"style="  COLOR: #0C2340; FONT-SIZE: unset;FONT-WEIGHT: bold; font-family: monospace;">
                             <i class="fa  fa-2x fa-sign-out" aria-hidden="true" ></i><span class="fs-6 d-none d-sm-block d-sm-none d-md-block"  >Déconnexion</span> </a>
                         </li>
         </ul>     

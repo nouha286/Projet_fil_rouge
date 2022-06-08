@@ -1,3 +1,7 @@
+<?php 
+   include('Client.php');
+   session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +50,7 @@
     <div class="col-2 ms-2 me-1 ">
         <?php include('side_dash_admin.php'); ?>
     </div>
-    <section class="callout ms-3 shadow-lg bg-body rounded col-8 col-md-8">
+    <section class="callout ms-2 shadow-lg bg-body rounded col-8 col-md-8">
     <h1 class="text-center display-5 mb-5 fst-italic mt-2" style="color:#9573D4;">Nouveaux Inscriptions</h1>
     
     <div class="table-responsive" >
@@ -72,20 +76,35 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Nouhaila ELAALAMI</td>
-          <td>Jumia</td>
-          <td>Site e-commerce</td>
-          
-          <td>0628578248</td>
-          <td>Marrakech</td>
-          <td>Loudaya</td>
-          <td>Montre</td>
-          <td>jumia@gmail.com</td>
-          <td class="d-flex flex-row"><a class="btn   me-2" style="text-decoration:none; color:white; background-color:greenyellow; " href="">Activer</a> <a class="btn  " style="text-decoration:none; color:white; background-color:red; " href="connexion_admin.php">Supprimer</a> </td>
+
+      <?php
+                            $Nvclient = new Client();
+                            $Nvclient = $Nvclient->affichNvClient();
+
+                            foreach ($Nvclient as $client) {
+                                echo '
+                                        <tr>
+                                            <th>' . $client['id'] . '</th>
+                                            <td>' . $client['Nom'] . '</td>
+                                            <td>' . $client['Nom_business'] . '</td>
+                                            <td>' . $client['Type_business'] . '</td>
+                                            <td>' . $client['Numero'] . '</td>
+                                            <td>' . $client['Ville'] . '</td>
+                                            <td>' . $client['Adresse'] . '</td>
+                                            <td>' . $client['Email'] . '</td>
+                                            <td>
+                                            <td class="d-flex flex-row"><a class="btn  btn-lg me-2" style="text-decoration:none; color:white; background-color:greenyellow; " href="">Activer</a> <a class="btn  btn-lg" style="text-decoration:none; color:white; background-color:red; " href="connexion_admin.php">Supprimer</a> </td>
          
-        </tr>
+                                        </tr>
+                                        
+                                        ';
+                            }
+
+
+
+
+                            ?>
+        
         
       </tbody>
     </table>

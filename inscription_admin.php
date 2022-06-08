@@ -1,3 +1,38 @@
+<?php
+
+include('Admin.php');
+$alert="";
+
+if(isset($_POST['save']))
+{ 
+  $id=2;
+  $sql="SELECT Identifecateur FROM identifecateur WHERE id LIKE ?";
+  $admin=new Admin();
+  $admin=$admin->GetData($sql);
+  $admin->execute([$id]);
+  $admin=$admin->fetch();
+   
+
+   if($_POST['identif']==$admin[0]) 
+   {
+     $ad=new Admin();
+     $ad->setNom($_POST['nom']);
+     $ad->setEmail($_POST['Email']);
+     $ad->setPassword($_POST['Password']);
+     $ad->insert();
+     $alert="";
+   }
+   else
+   { 
+     $alert='<div class="alert alert-danger" role="alert">
+     Vous n`étes pas un administrateur, vous n`avez pas le droit de s`inscrir !
+   </div>';
+   }
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,11 +43,13 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
-    <title>connexion-client</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>  
+  <title>connexion-client</title>
 
 </head>
 <style>
- @media screen and (max-width: 600px)
+ @media screen and (max-width: 1400px)
  {
      .btn-nav
      {
@@ -27,9 +64,20 @@
        
      }
 
-    
+    .card
+    {
+        margin: auto;
+    }
    
  }
+ .parsley-errors-list
+  {
+    color: red;
+  } 
+  .session
+  {
+    display: none;
+  }
    
 </style>
 
@@ -40,32 +88,32 @@
 
 <section class="container">
 
-<div class="n 	d-none d-xxl-block ">
+<div class="row">
                   <img src="admin2.svg" style="max-width:300px ;" alt="">
     </div>
    <div class="row  mt-5">
   
 
 
-    <div class="card col-sm-6  shadow-lg p-3 mb-5 bg-body rounded" >
+    <div class="card col-sm-10 col-md-10 col-lg-6 shadow-lg p-3 mb-5 bg-body rounded"  >
           <div class="card-body " >
-          <form>
+          <form method="POST" data-parsley-validate>
           <div class="mb-3">
                         
-                        <input type="text" class="form-control" placeholder="Nom" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="text" name="nom"  data-parsley-trigger="change" required data-parsley-requided="true" class="form-control" data-parsley-length="[4, 20]"  pattern="/^[a-zA-Z ]+$/" data-parsley-error-message="Le nom ne doit pas contenir des chiffres ou caractéres spéciaux "  placeholder="Nom" >
                         
               </div>
 
          
               <div class="mb-3">
                    
-                        <input type="email" placeholder="Adresse Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="email" name="Email" data-parsley-trigger="change" required data-parsley-requided="true" placeholder="Adresse Email" class="form-control" id="email" aria-describedby="emailHelp">
                         
               </div>
 
               <div class="mb-3">
                    
-                        <input type="email" placeholder="Confirmez l'adresse Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="email" data-parsley-trigger="change" required data-parsley-requided="true" placeholder="Confirmez l'adresse Email" class="form-control" data-parsley-equalto="#email"  aria-describedby="emailHelp">
                         
               </div>
 
@@ -73,19 +121,20 @@
            
                       <div class="mb-3">
                        
-                        <input type="password" class="form-control" placeholder="Password" id="exampleInputPassword1">
+                        <input name="Password" type="password" data-parsley-trigger="change" class="form-control" pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,15})" data-parsley-error-message="le mot de passe doit contenir des caractères majuscules , miniscule , des chiffres et des caractères spéciaux!" required data-parsley-requided="true" placeholder="Password" id="exampleInputPassword1">
                       </div>
 
                       <div class="mb-3">
-                        <input type="password" placeholder="Confirmation Password" class="form-control" id="exampleInputPassword1">
+                        <input type="password" data-parsley-trigger="change"   placeholder="Confirmation Password" required data-parsley-requided="true" class="form-control" data-parsley-equalto="#exampleInputPassword1">
                       </div>
 
                       
                       <div class="mb-3">
-                        <input type="password" placeholder="Identifient admin" class="form-control" id="exampleInputPassword1">
+                        <input type="password" name="identif" data-parsley-trigger="change" placeholder="Identifient admin" required data-parsley-requided="true" class="form-control"  >
                       </div>
-
-                      <button type="submit" class="btn btn-primary">S'inscrire</button>
+                        <?php
+                        echo $alert; ?>
+                      <button type="submit" name="save" class="btn btn-primary">S'inscrire</button>
             </form>
           </div>
           <div class="text-center">
@@ -106,3 +155,4 @@
 
 </body>
 </html>
+<script type="text/javascript" src="parsly_fr.js"></script>

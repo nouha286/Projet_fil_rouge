@@ -1,10 +1,45 @@
+<?php
+ include('Colis.php');
+ session_start();
+ $client=new Colis();
+ $client->setIdClient($_SESSION['id_client']);
+ 
+   if(isset($_POST['save']))
+   {
+     
+      $client->setDes($_POST['nom']);
+      $client->setStatut($_POST['statut']);
+      $client->setTel_Des($_POST['Tel']);
+      $client->setVille_Des($_POST['Ville']);
+      $client->setAdresse_Des($_POST['Adresse']);
+      $client->setDisponibilité($_POST['Dis']);
+      $client->setProduit($_POST['Prod']);
+      $client->setPoids($_POST['Poid']);
+      $client->setPrix($_POST['Prix']);
+      $date=date('l j F Y, H:i');
+      
+      $client->setDate_C($date);
+      
+     
+         
+      
+
+      $client->insert();
+   }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="i18n/fr.js"></script>
+    <script src="i18n/it.js"></script>
+
     <?php include('scriipt.php'); ?>
+
     <title>Document</title>
 </head>
 <style>
@@ -34,7 +69,10 @@
      display: none;
  }
 
- 
+ .parsley-errors-list
+  {
+    color: red;
+  }  
  
 </style>
 <body style="overflow-x:hidden;">
@@ -55,33 +93,54 @@
           <th scope="col">colis N°</th>
           <th scope="col">DESTAINATAIRE</th>
           <th scope="col">STATUT</th>
-          <th scope="col">DATE DE CREATION</th>
-          <th scope="col">PRIX</th>
-
           <th scope="col">TEL.DES</th>
-          <th scope="col">VILLE.DES</th>
+          <th scope="col">Ville.DES</th>
+          <th scope="col">ADRESSE.DES</th>
+
           <th scope="col">Desponibilité.DES</th>
-          <th scope="col">PRODUITS</th>
+          <th scope="col">PRODUIT</th>
+         
           <th scope="col">POIDS</th>
+          <th scope="col">PRIX</th>
+          <th scope="col">ETAT</th>
           <th scope="col">ACTIONS</th>
           
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Nouhaila ELAALAMI</td>
-          <td>en stock</td>
-          <td>4/06/2022</td>
-          <td>200,0 <span>DH</span></td>
-          <td>0628578248</td>
-          <td>Marrakech</td>
-          <td>6/6/2022</td>
-          <td>Montre</td>
-          <td>5Kg</td>
-          <td><a href="#" class="me-3" ><i class="fa fa-lg fa-trash text-danger" aria-hidden="true"></i></a><a href="#" ><i class="fa fa-lg fa-pencil-square-o text-success" aria-hidden="true"></i></a></td>
+        
+      <?php
+                            $Nvcolis = new Colis();
+                            $Nvcolis = $Nvcolis->affichNvColis();
+                            
+                            foreach ($Nvcolis as $colis) {
+                                echo '
+                                        <tr>
+                                            <th>' . $colis['id'] . '</th>
+                                            <td>' . $colis['Destinataire'] . '</td>
+                                            <td>' . $colis['Statut'] . '</td>
+                                            <td>' . $colis['Telephone_Des'] . '</td>
+                                            <td>' . $colis['Ville_Des'] . '</td>
+                                            <td>' . $colis['adresse_Des'] . '</td>
+                                            <td>' . $colis['Disponibilite_Des'] . '</td>
+                                            <td>' . $colis['Produit'] . '</td>
+                                            <td>' . $colis['Poids'] . 'Kg</td>
+                                            <td>' . $colis['Prix'] . '</td>
+                                            <td>' . $colis['Etat'] . '</td>
+                                          
+                                            <td><a href="#" class="me-3" ><i class="fa fa-lg fa-trash text-danger" aria-hidden="true"></i></a><a href="#" ><i class="fa fa-lg fa-pencil-square-o text-success" aria-hidden="true"></i></a></td>
          
-        </tr>
+                                        </tr>
+                                        
+                                        ';
+                            }
+
+
+
+
+                            ?>
+         
+        
         
       </tbody>
     </table>
@@ -101,53 +160,58 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <form>
+
+      
+      <form data-parsley-validate method="POST">
           <div class="mb-3">
                         
-                        <input type="text" class="form-control" placeholder="Destinataire" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input required	data-parsley-required="true" name="nom"  pattern="/^[a-zA-Z ]{3,20}$/" data-parsley-pattern="/^[a-zA-Z ]{3,20}$/" type="text" class="form-control" data-parsley-trigger="change" placeholder="Destinataire" id="exampleInputEmail6" >
                         
               </div>
 
               <div class="mb-3">
                        <label for="" class="mb-1">Statut</label>
-                       <select class="form-select" aria-label="Default select example">
-                          <option selected>Nouveau colis</option>
-                          <option value="E-commerce">colis du stock</option>
-                          <option value="Auto-entrepreneur">Attente du ramassage</option>
+                       <select name="statut" required	data-parsley-required="true" class="form-select" aria-label="Default select example">
+                          <option value="Nouveau colis" selected>Nouveau colis</option>
+                          <option value="colis du stock">colis du stock</option>
+                          <option value="Attente du rammasage">Attente du ramassage</option>
                         </select>
                         
               </div>
 
 
-            
-
               <div class="mb-3">
                        
-                        <input type="text" placeholder="Numéro de téléphone du destinataire" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input data-parsley-required="true" name="Tel" required pattern="^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$" data-parsley-trigger="change" data-parsley-pattern="^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$"	 type="text"  placeholder="Numéro de téléphone du destinataire" class="form-control" id="exampleInputEmail7" >
                         
               </div>
               <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Ville" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="text" data-parsley-required="true" name="Ville" required class="form-control" pattern="/^[a-zA-Z ]{3,20}$/" data-parsley-pattern="/^[a-zA-Z ]{3,20}$/" data-parsley-trigger="change"	 placeholder="Ville" id="exampleInputEmail0" >
                         
               </div>
               <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Adresse du destinataire" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="text" data-parsley-required="true" name="Adresse" required class="form-control"  placeholder="Adresse du destinatair" data-parsley-trigger="change" id="exampleInputEmail5">
                         
               </div>
               
               <div class="mb-3">
                         <label for="" class="mb-2">Disponibilité du destinaire</label>
-                        <input type="date" class="form-control" placeholder="Disponibilité du client" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input data-parsley-required="true" name="Dis" required type="date" class="form-control" placeholder="Disponibilité du client" data-parsley-trigger="change" id="exampleInputEmail4" >
                         
               </div>
               <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Produit" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input data-parsley-required="true" name="Prod" required type="text" class="form-control"  pattern="/^[a-zA-Z ]{3,20}$/" data-parsley-pattern="/^[a-zA-Z ]{3,20}$/" data-parsley-trigger="change" placeholder="Produit" id="exampleInputEmail1" >
                         
               </div>
               
               <div class="mb-3">
                         <label for="" class="mb-2">Poids Du Produis</label>
-                        <input type="number" class="form-control" max="30" min="0" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input data-parsley-required="true" name="Poid" max="30"	data-parsley-max="30" required type="number" class="form-control" data-parsley-trigger="change" max="30" min="0" id="exampleInputEmail2" >
+                        
+              </div>
+              <div class="mb-3">
+                        
+                        <input data-parsley-required="true" name="Prix" required type="text" pattern="/^(-)?[0-9]+([.,][0-9]+(e(-)?[0-9]+)?)?$/" data-parsley-pattern="/^(-)?[0-9]+([.,][0-9]+(e(-)?[0-9]+)?)?$/" placeholder="Prix" data-parsley-trigger="change" class="form-control"  id="exampleInputEmail3" >
                         
               </div>
               
@@ -157,7 +221,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <button type="submit" name="save" class="btn btn-primary">Enregistrer</button>
       </div>
       </form>
     </div>
@@ -169,3 +233,7 @@
 
 </body>
 </html>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>
+<script type="text/javascript" src="parsly_fr.js"></script>

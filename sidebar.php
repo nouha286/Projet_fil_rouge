@@ -1,10 +1,11 @@
+
 <div class="sticky-top" style="background-color: white;">
 <nav class="navbar  navbar-light  "  >
   <div class="container-fluid"  >
     <img src="logo-rm.png" style="max-width:70px;" alt="">
-
-    <span style="color: grey;" class="d-sm-none d-sm-block d-none d-md-block">+212628578248</span>
-    <span style="color: grey;" class="d-sm-none d-sm-block d-none d-md-block">0500770079</span>
+    <span style="color: grey;" class="session">Bonjour <?php echo $_SESSION['nom'];?></span>
+    <span style="color: grey;" class="d-sm-none d-sm-block  d-none d-md-block">+212628578248</span>
+    
     <span style="color: grey;" class="d-sm-none d-sm-block d-none d-md-block">deliveryalami2020@gmail.com</span>
 
     <a class="btn client btn-nav btn-lg" style="text-decoration:none; color:white; background-color: #9573D4; " href="connexion_client.php">espace client</a> 

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,20 +67,51 @@
       </thead>
       <tbody>
         <tr>
-          <th scope="row">1</th>
-          <td>Jumia</td>
-          <td>Nouhaila ELAALAMI</td>
+      <?php
+                            $Nvcolis = new Colis();
+                            $Nvcolis = $Nvcolis->affichNvColis();
+                            
+                            foreach ($Nvcolis as $colis) {
+                                echo '
+                                        
+                                            <th>' . $colis['id'] . '</th>
+                                            <td>' . $colis['Destinataire'] . '</td>
+                                            <td>' . $colis['Statut'] . '</td>
+                                            <td>' . $colis['Telephone_Des'] . '</td>
+                                            <td>' . $colis['Ville_Des'] . '</td>
+                                            <td>' . $colis['adresse_Des'] . '</td>
+                                            <td>' . $colis['Disponibilite_Des'] . '</td>
+                                            <td>' . $colis['Produit'] . '</td>
+                                            <td>' . $colis['Poids'] . 'Kg</td>
+                                            <td>' . $colis['Prix'] . '</td>
+                                            <td>' . $colis['Etat'] . '</td>
+                                          
+                                            <td><a href="#" class="me-3" ><i class="fa fa-lg fa-trash text-danger" aria-hidden="true"></i></a><a href="#" ><i class="fa fa-lg fa-pencil-square-o text-success" aria-hidden="true"></i></a></td>
          
-          <td>4/06/2022</td>
-          <td>5 <span>Kg</span></td>
-          <td>0628578248</td>
-          <td>Marrakech</td>
-          <td>Montre</td>
-         
-          <td><a href="#" class="me-3" ><i class="fa fa-lg fa-trash text-danger" aria-hidden="true"></i></a><a href="#" ><i class="fa fa-lg fa-pencil-square-o text-success" aria-hidden="true"></i></a></td>
-         
+                                        
+                                        
+                                        ';
+                            }
+                           echo   '
+                                        
+                           
+                         
+                           <td>' . $colis['Disponibilite_Des'] . '</td>
+                           <td>' . $colis['Produit'] . '</td>
+                           <td>' . $colis['Poids'] . 'Kg</td>
+                           <td>' . $colis['Prix'] . '</td>
+                           <td>' . $colis['Etat'] . '</td>
+                         
+                           <td><a href="#" class="me-3" ><i class="fa fa-lg fa-trash text-danger" aria-hidden="true"></i></a><a href="#" ><i class="fa fa-lg fa-pencil-square-o text-success" aria-hidden="true"></i></a></td>
+
+                       
+                       
+                       ';
+
+
+
+                            ?>
         </tr>
-        
       </tbody>
     </table>
     </div>

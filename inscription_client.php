@@ -1,18 +1,35 @@
+<?php
+ include('Client.php');
+   if(isset($_POST['save']))
+   {
+      $client=new client();
+      $client->setNom($_POST['nom']);
+      $client->setNom_business($_POST['n_bus']);
+      $client->setNumero($_POST['Tel']);
+      $client->setVille($_POST['Ville']);
+      $client->setAdresse($_POST['Adresse']);
+      $client->setType_business($_POST['T']);
+      $client->setEmail($_POST['Email']);
+      $client->setPassword($_POST['Password']);
+
+      $client->insert();
+   }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
-    <title>connexion-client</title>
+  
+
+    <?php include('scriipt.php'); ?>
+<title>connexion-client</title>
 
 </head>
 <style>
- @media screen and (max-width: 600px)
+ @media screen and (max-width: 1400px)
  {
      .btn-nav
      {
@@ -27,9 +44,20 @@
        
      }
 
-    
+    .card
+    {
+        margin: auto;
+    }
    
  }
+ .parsley-errors-list
+  {
+    color: red;
+  }  
+  .session
+  {
+    display: none;
+  }
    
 </style>
 
@@ -39,33 +67,32 @@
 
 <section class="container">
 
-<div class="n 	d-none d-xxl-block ">
+<div class="row ">
                   <img src="img.svg" style="max-width:300px ;" alt="">
     </div>
    <div class="row  mt-5">
   
 
 
-    <div class="card col-sm-6  shadow-lg p-3 mb-5 bg-body rounded" >
+    <div class="card col-sm-10 col-md-10 col-lg-6 shadow-lg p-3 mb-5 bg-body rounded"  >
           <div class="card-body " >
-          <form>
+
+          <form data-parsley-validate  method="POST">
           <div class="mb-3">
                         
-                        <input type="text" class="form-control" placeholder="Nom" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        
+          <input required name="nom"	 required  type="text" class="form-control" pattern="/^[a-zA-Z ]+$/" data-parsley-trigger="change" placeholder="Nom" data-parsley-error-message="Le nom ne doit pas contenir des chiffres ou caractéres spéciaux " data-parsley-required="true" data-parsley-length="[4, 20]" id="exampleInputEmail6" >
               </div>
 
               <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Nom du business" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="text" required name="n_bus" class="form-control"  pattern="/^[a-zA-Z ]+$/" 	 data-parsley-required="true" data-parsley-trigger="change" placeholder="Nom du business"  >
                         
               </div>
 
 
               <div class="mb-3">
                        
-                       <select class="form-select" aria-label="Default select example">
-                          <option selected>Type de client</option>
-                          <option value="E-commerce">E-commerce</option>
+                       <select name="T"  class="form-select" aria-label="Default select example">
+                          <option selected value="E-commerce">E-commerce</option>
                           <option value="Auto-entrepreneur">Auto-entrepreneur</option>
                           <option value="Moyenne entreprise SARL">Moyenne entreprise SARL</option>
                         </select>
@@ -74,22 +101,22 @@
 
               <div class="mb-3">
                        
-                        <input type="text" placeholder="Numéro de téléphone du business" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input  required data-parsley-required="true" name="Tel"  pattern="^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$" data-parsley-trigger="change"  type="text" placeholder="Numéro de téléphone du business" class="form-control" >
                         
               </div>
               <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Ville" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="text" name="Ville"  required data-parsley-required="true" class="form-control"  data-parsley-trigger="change" pattern="/^[a-zA-Z]+(?:(?:\\s+|-)[a-zA-Z]+)*$/"	 placeholder="Ville" id="exampleInputEmail0" >
                         
               </div>
               <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Adresse" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="text" name="Adresse" class="form-control" placeholder="Adresse"  required data-parsley-required="true"  data-parsley-trigger="change" >
                         
               </div>
               
 
               <div class="mb-3">
                    
-                        <input type="email" placeholder="Adresse Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="email" name="Email" data-parsley-trigger="change"  required data-parsley-required="true" data-parsley-type="email" placeholder="Adresse Email" class="form-control"  aria-describedby="emailHelp">
                         
               </div>
 
@@ -98,14 +125,14 @@
            
                       <div class="mb-3">
                        
-                        <input type="password" class="form-control" placeholder="Password" id="exampleInputPassword1">
+                        <input type="password" name="Password" pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,15})" data-parsley-error-message="le mot de passe doit contenir des caractères majuscules , miniscule , des chiffres et des caractères spéciaux!"  required data-parsley-required="true"  data-parsley-trigger="change" class="form-control" placeholder="Password" id="password">
                       </div>
 
                       <div class="mb-3">
-                        <input type="password" placeholder="Confirmation Password" class="form-control" id="exampleInputPassword1">
+                        <input type="password" data-parsley-trigger="change"  data-parsley-equalto="#password"  required data-parsley-required="true" placeholder="Confirmation Password" class="form-control" id="exampleInputPassword1">
                       </div>
 
-                      <button type="submit" class="btn btn-primary">S'inscrire</button>
+                      <button type="submit" name="save" class="btn btn-primary">S'inscrire</button>
             </form>
           </div>
           <div class="text-center">
@@ -113,8 +140,8 @@
           </div>
     </div> 
 
-    <div class="n col-sm-6">
-     <img src="client.svg"  alt="">
+    <div class="n  col-sm-6">
+     <img  src="client.svg"  alt="">
    </div>
    </div>
 
@@ -126,3 +153,6 @@
 
 </body>
 </html>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>
+<script type="text/javascript" src="parsly_fr.js"></script>

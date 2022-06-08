@@ -29,6 +29,10 @@
     
    
  }
+ .session
+  {
+    display: none;
+  }
    
 </style>
 

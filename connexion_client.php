@@ -1,3 +1,64 @@
+<?php 
+
+include('Client.php');
+
+$alert='';
+if (isset($_POST['login']) && isset($_POST['Email']) && isset($_POST['Password']) )
+{
+    $connection=new Client();
+            
+           
+         
+            $connection->setEmail($_POST['Email']);
+            $connection->setPassword($_POST['Password']);  
+            $Email=$connection->getEmail();
+            $Password= $connection->getPassword(); 
+           
+            $sql="SELECT * FROM client WHERE Email LIKE ? AND Password LIKE ? ";
+            $result=$connection->GetData($sql);
+            $result->execute([$Email,$Password]);
+            $res= $result->fetch();
+            
+           
+            
+            if($res)
+            {   
+              session_start();
+               
+              $_SESSION['nom']=$res[1];
+              $_SESSION['id_client']=$res[0];
+              $_SESSION['Nom_bus']=$res[2];
+              $_SESSION['Tel']=$res[4];
+              $_SESSION['Adresse']=$res[6];
+              $_SESSION['Ville']=$res[5];
+
+
+              
+
+          
+              header('location: home_client.php');
+             
+              
+                $alert='';
+            }
+             
+            
+            else 
+            {
+                
+                $alert= '<div class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                     vos information sont incorrects veuillez vérifiez votre email ou mot de passe!! 
+                    </div>
+                </div>';
+                
+               
+
+            }
+          }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +69,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
-    <title>connexion-client</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>  
+  <title>connexion-client</title>
 
 </head>
 <style>
@@ -33,6 +96,14 @@
     }
    
  }
+ .parsley-errors-list
+  {
+    color: red;
+  }  
+  .session
+  {
+    display: none;
+  }
    
 </style>
 
@@ -42,30 +113,30 @@
 
 <section class="container">
 
-<div class="n  ">
+<div class="row ">
                   <img src="img.svg" style="max-width:500px ;" alt="">
     </div>
    <div class="row  mt-5">
   
 
 
-    <div class="card col-sm-6  shadow-lg p-3 mb-5 bg-body rounded" style="max-height:250px ; min-width:500px;" >
+    <div class="card col-sm-10 col-md-10 col-lg-6 shadow-lg p-3 mb-5 bg-body rounded" style="max-height:350px ;" >
           <div class="card-body " >
-          <form>
+          <form data-parsley-validate method="POST">
               <div class="mb-3">
                    
-                        <input type="email" placeholder="Adresse Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input name="Email" type="email" required data-parsley-requided="true" placeholder="Adresse Email" data-parsley-trigger="change" class="form-control" id="exampleInputEmail2" >
                         
               </div>
 
                       <div class="mb-3">
                        
-                        <input type="password" class="form-control" placeholder="Password" id="exampleInputPassword1">
+                        <input name="Password" type="password" required data-parsley-requided="true" class="form-control" data-parsley-trigger="change" placeholder="Password" id="exampleInputPassword1">
                       </div>
 
-                      
+                      <?php echo $alert; ?>
 
-                      <button type="submit" class="btn btn-primary"><a href="home_client.php" style="color:white; text-decoration:none;">Se connecter</a></button>
+                      <button name="login" type="submit" class="btn btn-primary">Se connecter</button>
             </form>
           </div>
           <div class="text-center">
@@ -86,3 +157,4 @@
 
 </body>
 </html>
+<script type="text/javascript" src="parsly_fr.js"></script>
