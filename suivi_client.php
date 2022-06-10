@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_start(); 
+include('Colis.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,20 +70,38 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Nouhaila ELAALAMI</td>
-          <td>en stock</td>
-          <td>4/06/2022</td>
-          <td>200,0 <span>DH</span></td>
-          <td>0628578248</td>
-          <td>Marrakech</td>
-          <td>6/6/2022</td>
-          <td>Montre</td>
-          <td>5Kg</td>
-          <td><p class="btn bg-success" style="color:white;">Livré</p></td>
-         
-        </tr>
+      <?php
+                            $Admin = new Colis();
+                            $Nvcolis = $Admin->affichNvColis();
+                            
+                            foreach ($Nvcolis as $colis) {
+                              
+                              
+                                echo '
+                                        <tr>
+                                            <th>' . $colis['id'] . '</th>
+                                            <td>' . $colis['Destinataire'] . '</td>
+                                            <td>' . $colis['Statut'] . '</td>
+                                            <td>' . $colis['Date_création'] . '</td>
+                                            <td>' . $colis['Prix'] . '</td>
+                                            <td>' . $colis['Telephone_Des'] . '</td>
+                                            <td>' . $colis['Ville_Des'] . '</td>
+                                           
+                                            <td>' . $colis['Disponibilite_Des'] . '</td>
+                                            <td>' . $colis['Produit'] . '</td>
+                                            <td>' . $colis['Poids'] . 'Kg</td>
+                                            
+                                            <td style="color:red;">' . $colis['Etat'] . '</td>
+                 
+                                        </tr>
+                                        
+                                        ';
+                            }
+
+
+
+
+                            ?>
         
       </tbody>
     </table>

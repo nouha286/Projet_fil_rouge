@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+include('Client.php');
+$client=new Client();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,15 +54,16 @@
 <h1 class="text-center display-5 mb-5 fst-italic mt-2" style="color:#9573D4;">Acceuil</h1>
             <div class="row mt-5 gx-5">
                 <div class="col-lg-4" >
-                <div class="p-3 border shadow-lg p-3 mb-5  rounded " style="background-color: #ACE1AF;"><span class="fs-3 fw-bold font-monospace">Colis à livrer</span><i class="fa fa-2x ms-2 fa-bolt" aria-hidden="true"></i> </div>
+                <div class="p-3 border shadow-lg p-3 mb-5  rounded " style="background-color: #ACE1AF;"><span class="fs-3 fw-bold font-monospace">Colis à livrer</span><i class="fa fa-2x ms-2 fa-bolt" aria-hidden="true"></i> <div> <?php echo $client->statistiqueColis();  ?> </div> </div>
                 </div>
 
                 <div class="col-lg-4">
-                <div class="p-3 border shadow-lg p-3 mb-5  rounded" style="background-color: #FBCEB1;"><span class="fs-3 fw-bold font-monospace">Colis à ramasser</span><i class="fa ms-2 fa-2x fa-cubes" aria-hidden="true"></i></div>
+                <div class="p-3 border shadow-lg p-3 mb-5  rounded" style="background-color: #FBCEB1;"><span class="fs-3 fw-bold font-monospace">Colis à ramasser</span><i class="fa ms-2 fa-2x fa-cubes" aria-hidden="true"></i><div> <?php echo $client->statistiqueRamassage();  ?> </div></div>
                 </div>
 
                 <div class="col-lg-4">
-                <div class="p-3 border shadow-lg p-3 mb-5  rounded " style="background-color: #F0E68C;"><span class="fs-3 fw-bold font-monospace">Retours</span><i class="fa ms-2 fa-2x fa-reply" aria-hidden="true"></i></div>
+                <div class="p-3 border shadow-lg p-3 mb-5   rounded " style="background-color: #F0E68C;"><span class="fs-3 fw-bold font-monospace">Retours</span><i class="fa ms-2  fa-refresh fa-spin fa-2x " aria-hidden="true"></i> <div><?php echo $client->statistiqueRetour();  ?> </div></div>
+                
                 </div>
             </div>
 </section>

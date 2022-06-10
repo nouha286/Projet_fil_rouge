@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_start(); 
+include('Admin.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

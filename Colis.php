@@ -16,7 +16,7 @@ class Colis extends Dbconnect
     public $Etat;
     public $Nom_Bus;
     public $date;
-
+    public $id_colis;
 
    
     public function setIdClient($id)
@@ -24,6 +24,13 @@ class Colis extends Dbconnect
 
        
         $this->id=$id;
+    }
+
+    public function setIdColis($id_colis)
+    {
+
+       
+        $this->id_colis=$id_colis;
     }
 
     public function setDes($Des)
@@ -168,6 +175,10 @@ class Colis extends Dbconnect
          return $this->Nom_Bus;
     }
     
+    public function getIdColis()
+    {
+         return $this->id_colis;
+    }
     
     
   public function insert()
@@ -177,12 +188,19 @@ class Colis extends Dbconnect
 
       $sql = "INSERT INTO colis VALUES (null,?,?,?,?,?,?,?,?,?,?,?,?)";
       $prepare = $this->GetData($sql);
-     
-     
       $prepare = $prepare->execute([$this->getDes(), $this->getStatut(), $this->getTel_Des(), $this->getVille_Des(), $this->getAdresse_Des(), $this->getDisponibilité(), $this->getProduit(), $this->getPoids(),$this->getPrix(), date('l j F Y, H:i'),'---',$this->getIdClient()]);
-      
     
       if ($prepare) {
+        $sql="SELECT id FROM colis order by id desc limit 1 ";
+        $res=$this->connect()->query($sql);
+        $res=$res->fetch();
+
+        $sql = "INSERT INTO  colis_a_rammasser VALUES (NULL,?)";
+        $prepare = $this->GetData($sql);
+        $prepare = $prepare->execute([$res['id']]);
+      
+         
+       
         header('location:colis_client.php');
       } else echo 'erreur!!!!';
     } catch (PDOException $ex) {
@@ -199,4 +217,72 @@ class Colis extends Dbconnect
       $prepare->execute([$param]);
       return $prepare->fetchAll();
   }
+
+
+  public function affichColisRamassage()
+  {
+      $sql="SELECT * FROM colis WHERE Statut LIKE ? AND id_client LIKE ?";
+      $prepare=$this->GetData($sql);
+      $param='Attente du rammasage';
+      $prepare->execute([$param, $_SESSION['id_client']]);
+      return $prepare->fetchAll();
+  }
+
+  public function editInfoRammassage($Adresse,$TEL,$Ville)
+  {
+    try {
+      $this->Adresse=$Adresse;
+      $this->TEL=$TEL;
+      $this->Ville=$Ville;
+     
+     $ID_client=$_SESSION['id_client'];
+      $sql = "UPDATE client SET Adresse=?, Numero=?, Ville=? WHERE id=$ID_client";
+      $prepare = $this->GetData($sql);
+      $prepare = $prepare->execute([$this->Adresse, $this->TEL,$this->Ville]);
+
+      if ($prepare) {
+        header('location:colis_a_rammasser.php');
+      } else echo 'erreur!!!!';
+
+
+    } catch (PDOException $ex) {
+      echo $ex->getMessage();
+    }
+  }
+
+
+  public function infoClient()
+  {
+      $sql="SELECT * FROM client WHERE id LIKE ?";
+      $prepare = $this->GetData($sql);
+      $ID_client=$_SESSION['id_client'];
+       $prepare->execute([$ID_client]);
+      return $prepare->fetch();
+
+
+  }
+
+  public function editInfoColis()
+  {
+    try {
+     
+     $date=date('l j F Y, H:i');
+      $sql = "UPDATE colis SET Destinataire='$this->Des', Statut='$this->Statut', Telephone_Des='$this->Tel_Des', Ville_Des='$this->Ville_Des', adresse_Des='$this->Adresse_Des', Disponibilite_Des='$this->Disponibilité' ,Produit='$this->Produit', Poids=$this->Poids,Prix=$this->Prix,Date_création='$date' WHERE id=$this->id_colis ";
+      
+     $prepare=$this->connect()->query($sql);
+
+      if ($prepare) {
+        
+        header('location:colis_client.php');
+      } else echo 'erreur!!!!';
+
+
+    } catch (PDOException $ex) {
+      echo $ex->getMessage();
+    }
+  }
+
+
+
+
 }

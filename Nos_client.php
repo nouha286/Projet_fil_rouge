@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_start();
+include('Admin.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,7 +63,7 @@
           <th scope="col"> N° TEL</th>
           <th scope="col">VILLE</th>
           <th scope="col">ADRESSE</th>
-          <th scope="col">PRODUITS</th>
+          
           <th scope="col">EMAIL</th>
           
           
@@ -72,19 +73,32 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Nouhaila ELAALAMI</td>
-          <td>Jumia</td>
-          <td>Site e-commerce</td>
-          
-          <td>0628578248</td>
-          <td>Marrakech</td>
-          <td>Loudaya</td>
-          <td>Montre</td>
-          <td>jumia@gmail.com</td>
-         
-        </tr>
+      <?php
+                            $Nvclient = new Admin();
+                            $Nvclient = $Nvclient->affichNosClient();
+
+                            foreach ($Nvclient as $client) {
+                                echo '
+                                        <tr>
+                                            <th>' . $client['id'] . '</th>
+                                            <td>' . $client['Nom'] . '</td>
+                                            <td>' . $client['Nom_business'] . '</td>
+                                            <td>' . $client['Type_business'] . '</td>
+                                            <td>' . $client['Numero'] . '</td>
+                                            <td>' . $client['Ville'] . '</td>
+                                            <td>' . $client['Adresse'] . '</td>
+                                            <td>' . $client['Email'] . '</td>
+                                            
+                                            
+                                        </tr>
+                                        
+                                        ';
+                            }
+
+
+
+
+                            ?>
         
       </tbody>
     </table>

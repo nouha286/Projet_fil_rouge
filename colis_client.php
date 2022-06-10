@@ -3,6 +3,7 @@
  session_start();
  $client=new Colis();
  $client->setIdClient($_SESSION['id_client']);
+
  
    if(isset($_POST['save']))
    {
@@ -68,11 +69,11 @@
  {
      display: none;
  }
-
  .parsley-errors-list
   {
     color: red;
   }  
+
  
 </style>
 <body style="overflow-x:hidden;">
@@ -102,7 +103,7 @@
          
           <th scope="col">POIDS</th>
           <th scope="col">PRIX</th>
-          <th scope="col">ETAT</th>
+         
           <th scope="col">ACTIONS</th>
           
         </tr>
@@ -126,9 +127,9 @@
                                             <td>' . $colis['Produit'] . '</td>
                                             <td>' . $colis['Poids'] . 'Kg</td>
                                             <td>' . $colis['Prix'] . '</td>
-                                            <td>' . $colis['Etat'] . '</td>
+                                           
                                           
-                                            <td><a href="#" class="me-3" ><i class="fa fa-lg fa-trash text-danger" aria-hidden="true"></i></a><a href="#" ><i class="fa fa-lg fa-pencil-square-o text-success" aria-hidden="true"></i></a></td>
+                                            <td><a href="edit_info_colis.php?id_del='.$colis['id'].'" class="me-3" ><i class="fa fa-lg fa-trash text-danger" aria-hidden="true"></i></a><a href="edit_info_colis.php?id='.$colis['id'].'" ><i class="fa fa-lg fa-pencil-square-o text-success" aria-hidden="true"></i></a></td>
          
                                         </tr>
                                         
@@ -186,7 +187,7 @@
                         
               </div>
               <div class="mb-3">
-                        <input type="text" data-parsley-required="true" name="Ville" required class="form-control" pattern="/^[a-zA-Z ]{3,20}$/" data-parsley-pattern="/^[a-zA-Z ]{3,20}$/" data-parsley-trigger="change"	 placeholder="Ville" id="exampleInputEmail0" >
+                        <input type="text" data-parsley-required="true" name="Ville" required class="form-control" pattern="/^[a-zA-Z ]{3,20}$/" data-parsley-pattern="/^[a-zA-Z ]{3,20}$/" data-parsley-trigger="change"	 placeholder="Ville"  >
                         
               </div>
               <div class="mb-3">

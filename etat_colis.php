@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php session_start();
+
+include('Admin.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,8 +60,12 @@
           <th scope="col">colis N°</th>
           <th scope="col">DESTAINATAIRE</th>
           <th scope="col">STATUT</th>
-          <th scope="col">PRODUITS</th>
-          <th scope="col">ETAT</th>
+          <th scope="col">Ville.DES</th>
+          <th scope="col">Disponibilite_Des</th>
+          <th scope="col">Produit</th>
+          <th scope="col">Poids</th>
+          <th scope="col">Prix</th>
+          <th scope="col">Nom business</th>
           <th scope="col" class="text-center">ACTIONS</th>
           
           
@@ -66,17 +73,41 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Nouhaila ELAALAMI</td>
-          <td>en stock</td>
-          <td>Montre</td>
-          <td>Retour</td>
+      <?php
+                            $Admin = new Admin();
+                            $Nvcolis = $Admin->affichNvColis();
+                            
+                            foreach ($Nvcolis as $colis) {
+                              $id=$colis['id_client'];
+                              $Admin->setNomstore($id);
+                              $nom_store=$Admin->NomStore();
+                                echo '
+                                        <tr>
+                                            <th>' . $colis['id'] . '</th>
+                                            <td>' . $colis['Destinataire'] . '</td>
+                                            <td>' . $colis['Statut'] . '</td>
+                                            
+                                            <td>' . $colis['Ville_Des'] . '</td>
+                                           
+                                            <td>' . $colis['Disponibilite_Des'] . '</td>
+                                            <td>' . $colis['Produit'] . '</td>
+                                            <td>' . $colis['Poids'] . 'Kg</td>
+                                            <td>' . $colis['Prix'] . '</td>
+                                            <td>' . $nom_store['Nom_business'] . '</td>
+                                            <td colspan="4" class="text-center"><a class="btn  btn-lg" style="text-decoration:none; color:white; background-color:greenyellow; " href="etat.php?id_Livré='.$colis['id'].'">Livré</a> <a class="btn  btn-lg" style="text-decoration:none; color:white; background-color:red; " href="etat.php?id_Retour='.$colis['id'].'">Retour</a> </td>
+         
+                                           
+                                        </tr>
+                                        
+                                        ';
+                            }
 
-         
-          <td colspan="4" class="text-center"><a class="btn  btn-lg" style="text-decoration:none; color:white; background-color:greenyellow; " href="">Livré</a> <a class="btn  btn-lg" style="text-decoration:none; color:white; background-color:red; " href="connexion_admin.php">Retour</a> </td>
-         
-        </tr>
+
+
+
+                            ?>
+          
+        
         
       </tbody>
     </table>

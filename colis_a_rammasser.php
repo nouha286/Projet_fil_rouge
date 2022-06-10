@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php session_start(); 
+include('Colis.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,13 +56,15 @@
       <thead>
         <tr>
           <th scope="col">colis N°</th>
-          <th scope="col">Nom du Vendeur</th>
-          <th scope="col">Adresse Vendeur</th>
+          <th scope="col">Nom du Store</th>
+          <th scope="col">Adresse.Vend</th>
+          <th scope="col">Ville.Vend</th>
+          <th scope="col">TELEPHONE.vend</th>
           <th scope="col">DATE DE CREATION</th>
-          <th scope="col">Poids</th>
-          <th scope="col">TELEPHONE</th>
-          <th scope="col">VILLE</th>
           <th scope="col">PRODUITS</th>
+          <th scope="col">Poids</th>
+         
+          
           <th scope="col">ACTIONS</th>
           
         </tr>
@@ -68,50 +72,33 @@
       <tbody>
         <tr>
       <?php
-                            $Nvcolis = new Colis();
-                            $Nvcolis = $Nvcolis->affichNvColis();
+                            $colis = new Colis();
+                            $Nvcolis = $colis->affichColisRamassage();
+                            $info_client=$colis->infoClient();
                             
                             foreach ($Nvcolis as $colis) {
                                 echo '
-                                        
+                                <tr>
                                             <th>' . $colis['id'] . '</th>
-                                            <td>' . $colis['Destinataire'] . '</td>
-                                            <td>' . $colis['Statut'] . '</td>
-                                            <td>' . $colis['Telephone_Des'] . '</td>
-                                            <td>' . $colis['Ville_Des'] . '</td>
-                                            <td>' . $colis['adresse_Des'] . '</td>
-                                            <td>' . $colis['Disponibilite_Des'] . '</td>
+                                            <td>' .  $info_client[2]. '</td>
+                                            <td>' . $info_client[6]. '</td>
+                                            <td>' .$info_client[5] . '</td>
+                                            <td>' . $info_client[4] . '</td>
+                                            <td>' . $colis['Date_création'] . '</td>
                                             <td>' . $colis['Produit'] . '</td>
                                             <td>' . $colis['Poids'] . 'Kg</td>
-                                            <td>' . $colis['Prix'] . '</td>
-                                            <td>' . $colis['Etat'] . '</td>
-                                          
-                                            <td><a href="#" class="me-3" ><i class="fa fa-lg fa-trash text-danger" aria-hidden="true"></i></a><a href="#" ><i class="fa fa-lg fa-pencil-square-o text-success" aria-hidden="true"></i></a></td>
-         
-                                        
-                                        
-                                        ';
-                            }
-                           echo   '
-                                        
-                           
-                         
-                           <td>' . $colis['Disponibilite_Des'] . '</td>
-                           <td>' . $colis['Produit'] . '</td>
-                           <td>' . $colis['Poids'] . 'Kg</td>
-                           <td>' . $colis['Prix'] . '</td>
-                           <td>' . $colis['Etat'] . '</td>
-                         
-                           <td><a href="#" class="me-3" ><i class="fa fa-lg fa-trash text-danger" aria-hidden="true"></i></a><a href="#" ><i class="fa fa-lg fa-pencil-square-o text-success" aria-hidden="true"></i></a></td>
-
-                       
-                       
-                       ';
+                                            
+                                            <td class="text-center"><a href="edit_rammassage.php?" ><i class="fa fa-lg fa-pencil-square-o text-success" aria-hidden="true"></i></a></td> </tr>;
+                            
+                                            ';
+                                            
+                                          }
+                          
 
 
 
                             ?>
-        </tr>
+       
       </tbody>
     </table>
     </div>

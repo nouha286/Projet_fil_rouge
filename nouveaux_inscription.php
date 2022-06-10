@@ -93,7 +93,7 @@
                                             <td>' . $client['Adresse'] . '</td>
                                             <td>' . $client['Email'] . '</td>
                                             <td>
-                                            <td class="d-flex flex-row"><a class="btn  btn-lg me-2" style="text-decoration:none; color:white; background-color:greenyellow; " href="">Activer</a> <a class="btn  btn-lg" style="text-decoration:none; color:white; background-color:red; " href="connexion_admin.php">Supprimer</a> </td>
+                                            <td class="d-flex flex-row"><a class="btn  btn-lg me-2" style="text-decoration:none; color:white; background-color:greenyellow; " href="etat.php?id_activer='.$client['id'].'">Activer</a> <a class="btn  btn-lg" style="text-decoration:none; color:white; background-color:red; " href="etat.php?id_supprimer='.$client['id'].'">Supprimer</a> </td>
          
                                         </tr>
                                         

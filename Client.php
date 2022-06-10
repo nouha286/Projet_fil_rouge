@@ -126,4 +126,34 @@ class Client extends Dbconnect
     return $prepare = $this->connect()->query($sql)->fetchALL();
   }
   
+
+  public function statistiqueColis()
+  {
+    $sql="SELECT * FROM colis WHERE id_client LIKE ? ";
+    $prepare = $this->GetData($sql);
+    $prepare->execute([$_SESSION['id_client']]);
+    $prepare=$prepare->fetchAll();
+    return count($prepare);
+    
+  }
+
+  public function statistiqueRamassage()
+  {
+    $sql="SELECT * FROM colis WHERE id_client LIKE ? AND Statut LIKE ?";
+    $prepare = $this->GetData($sql);
+    $prepare->execute([$_SESSION['id_client'],'Attente du rammasage']);
+    $prepare=$prepare->fetchAll();
+    return count($prepare);
+    
+  }
+
+  public function statistiqueRetour()
+  {
+    $sql="SELECT * FROM colis WHERE id_client LIKE ? AND Etat LIKE ?";
+    $prepare = $this->GetData($sql);
+    $prepare->execute([$_SESSION['id_client'],'Retour']);
+    $prepare=$prepare->fetchAll();
+    return count($prepare);
+    
+  }
 }

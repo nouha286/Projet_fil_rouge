@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php session_start(); 
+include('Admin.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,32 +56,49 @@
       <thead>
         <tr>
           <th scope="col">colis N°</th>
-          <th scope="col">Nom du Vendeur</th>
+          <th scope="col">NOM VENDEUR</th>
+          <th scope="col">Telephone du Vendeur</th>
           <th scope="col">Adresse Vendeur</th>
+          <th scope="col">VILLE DU VENDEUR</th>
+          <th scope="col">PRODUIT</th>
+          
+          <th scope="col">POIDS</th>
           <th scope="col">DATE DE CREATION</th>
-          <th scope="col">Poids</th>
-          <th scope="col">TELEPHONE</th>
-          <th scope="col">VILLE</th>
-          <th scope="col">PRODUITS</th>
           <th class="text-center" scope="col">ACTIONS</th>
           
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Jumia</td>
-          <td>Nouhaila ELAALAMI</td>
+      <?php
+                            $colis = new Admin();
+                            $Nvcolis = $colis->affichColisRamassage();
+                            
+                            
+                            foreach ($Nvcolis as $colis) {
+                                echo '
+                                <tr>
+                                            <th>' . $colis[0] . '</th>
+                                            <td>' .  $colis[1]. '</td>
+                                            <td>' . $colis[2]. '</td>
+                                            <td>' .$colis[3] . '</td>
+                                            <td>' . $colis[4] . '</td>
+                                            <td>' . $colis[5] . '</td>
+                                            <td>' . $colis[6] . '</td>
+                                            <td>' . $colis[7] . '</td>
+                                            
+                                            <td class="text-center"> <a class="btn" style="text-decoration:none; color:white; background-color:red; " href="etat.php?id_ramassage='.$colis[0].'">Rammasser</a> </td>
          
-          <td>4/06/2022</td>
-          <td>5 <span>Kg</span></td>
-          <td>0628578248</td>
-          <td>Marrakech</td>
-          <td>Montre</td>
+                                            ';
+                                            
+                                          }
+                          
+
+
+
+                            ?>
          
-          <td class="text-center"> <a class="btn  " style="text-decoration:none; color:white; background-color:red; " href="connexion_admin.php">Rammasser</a> </td>
-         
-        </tr>
+          
+        
         
       </tbody>
     </table>
